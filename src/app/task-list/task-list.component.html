@@ -1,0 +1,25 @@
+<p-dataView #dv [value]="tasksObservable|async" [rows]="20" paginatorPosition="both">   
+  <p-header>ChocoBlaster</p-header>
+  <ng-template let-task pTemplate="listItem">
+    <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+      <div class="ui-g-1 ui-md-1"></div>
+      <div class="ui-g-8 ui-md-8">
+        <b>{{task.user}}</b>
+        <p>Amène les chocos le </p>
+        <b>{{task.date}}</b>
+
+      </div>
+      <div class="ui-g-3 ui-md-3" style="padding-top:10%;">
+        <p-checkbox name="taskDone" [value]="task.done" [(ngModel)]="task.done"></p-checkbox>
+      </div>
+    </div>
+  </ng-template>
+
+  <p-footer>
+    <button mat-fab type="button" (click)="showDialog()" ><i class="fa fa-plus"></i></button>
+  </p-footer>
+</p-dataView>
+
+<p-dialog header="New ChocoBlast" [(visible)]="displayDialog" [autoAlign]="true"  [contentStyle]="{'height':'300px', 'width':'300px'}">
+    <app-task (save)="saveTask($event)"></app-task>
+</p-dialog>
